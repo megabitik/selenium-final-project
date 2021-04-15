@@ -17,3 +17,4 @@ class ProductPageLocators:
     BOOK_NAME = (By.CSS_SELECTOR, 'div.product_main>h1')
     BASKET_MINI = (By.CSS_SELECTOR, 'div.basket-mini')
     BOOK_PRICE = (By.CSS_SELECTOR, 'p.price_color')
+    MESSAGE_ANY = (By.CSS_SELECTOR, '#messages>div.alert-success')
