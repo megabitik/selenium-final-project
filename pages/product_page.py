@@ -19,7 +19,7 @@ class ProductPage(BasePage):
                                              f'was not found in <strong> messages: {messages_strong}'
 
     def should_be_equal_book_price_and_basket(self):
-        pattern_price = r'(\d+(\.\d+)?)'  # RegExt takes float/int part from text, better check with .isnumeric()
+        pattern_price = r'(\d+(\.\d+)?)'  # RegExp to search the float/int in text
         basket_cost = self.browser.find_element(*ProductPageLocators.BASKET_MINI).text
         basket_cost = self._make_float(re.findall(pattern_price, basket_cost).pop()[0])
         book_price = self.browser.find_element(*ProductPageLocators.BOOK_PRICE).text
