@@ -14,7 +14,7 @@ def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
     page = ProductPage(browser, link)
     page.open()
     page.add_to_cart()
-    assert page.is_not_element_present(*ProductPageLocators.MESSAGE_ANY), 'Guest can see success message FAILED'
+    page.should_be_no_messages()
 
 @pytest.mark.need_review
 def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
@@ -28,7 +28,7 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
 def test_guest_cant_see_success_message(browser):
     page = ProductPage(browser, link)
     page.open()
-    assert page.is_not_element_present(*ProductPageLocators.MESSAGE_ANY), "Guest can't see success message FAILED"
+    page.should_be_no_messages()
 
 
 def test_guest_should_see_login_link_on_product_page(browser):
@@ -52,7 +52,7 @@ def test_message_disappeared_after_adding_product_to_basket(browser):
     page = ProductPage(browser, link)
     page.open()
     page.add_to_cart()
-    assert page.is_disappeared(*ProductPageLocators.MESSAGE_ANY), "Message didn't disappear after adding to basket"
+    page.should_be_no_messages()
 
 @pytest.mark.need_review
 def test_guest_can_add_product_to_basket(browser):
@@ -93,7 +93,7 @@ class TestUserAddToBasketFromProductPage:
         link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/'
         page = ProductPage(browser, link)
         page.open()
-        assert page.is_not_element_present(*ProductPageLocators.MESSAGE_ANY), "FAIL: Guest can see messages right away"
+        page.should_be_no_messages()
 
     @pytest.mark.need_review
     def test_user_can_add_product_to_basket(self, browser):
@@ -101,6 +101,5 @@ class TestUserAddToBasketFromProductPage:
         page = ProductPage(browser, link)
         page.open()
         page.add_to_cart()
-        # page.solve_quiz_and_get_code()
         page.should_be_matching_book_names()
         page.should_be_equal_book_price_and_basket()

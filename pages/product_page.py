@@ -12,6 +12,9 @@ class ProductPage(BasePage):
     def add_to_cart(self):
         self.browser.find_element(*ProductPageLocators.BUTTON_BUY_ITEM).click()
 
+    def should_be_no_messages(self):
+        assert self.is_not_element_present(*ProductPageLocators.MESSAGE_ANY), 'Guest can see success message FAILED'
+
     def should_be_matching_book_names(self):
         messages_strong = [m.text for m in self.browser.find_elements(*ProductPageLocators.ALL_MESSAGES)]
         book_name = self.browser.find_element(*ProductPageLocators.BOOK_NAME).text
